@@ -29,7 +29,7 @@
             Login or create account
           </p>
   
-          <form @submit="login">
+          <form @submit.prevent="login"  method="POST">
             <div class="w-full mt-4">
               <input v-model="email" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300
                   " type="email" placeholder="Email Address" aria-label="Email Address" />
@@ -51,7 +51,7 @@
                   ">Forget Password?</a>
   
               <button  class="px-4  py-2 leading-5 text-white transition-colors duration-200 transform bg-gray-700 rounded hover:bg-gray-600 focus:outline-none
-                  " type="button">
+                  " type="submit">
                 Login
               </button>
             </div>
@@ -72,11 +72,9 @@
       
   <script>
   import Swal from 'sweetalert2';
-  import config from "@/config";
   export default {
     data() {
       return {
-        // API_KEY:config.getApi.apiKey,
         email: '',
         password: '',
         fname: ''
@@ -113,7 +111,7 @@
   
   
             Swal.fire("Login Sucessful");
-            // window.location.href='/dashboard'
+            window.location.href='/dashboard'
           })
           .catch(function (error) {
             console.log(error);

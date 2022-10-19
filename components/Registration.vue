@@ -22,29 +22,33 @@
 
         <form action="#" @submit.prevent="registration"   method="POST" >
           <!-- fname -->
-          <div class="w-full mt-4">
-            <input
+          <div  class="w-full mt-4">
+            <input id="fname"
               v-model="fname"
               class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300"
               type="text"
               placeholder="First Name"
               aria-label="First Name"
+              required
             />
           </div>
           <!-- lname -->
-          <div class="w-full mt-4">
+          <div  class="w-full mt-4">
             <input
+            id="lname"
               v-model="lname"
               class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300"
               type="text"
               placeholder="Last Name"
               aria-label="Last Name"
+              required
             />
+            
           </div>
 
           <!-- email -->
           <div class="w-full mt-4">
-            <input
+            <input id="email"
               v-model="email"
               class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300"
               type="email"
@@ -52,7 +56,6 @@
               aria-label="Email Address"
             />
           </div>
-
           <div class="w-full mt-4">
             <input
               v-model="password"
@@ -64,7 +67,7 @@
           </div>
 
           <div class="flex items-center justify-between mt-4">
-            <button 
+            <button @click="validateForm" 
               class="px-4 py-2 leading-5 text-white transition-colors duration-200 transform bg-gray-700 rounded hover:bg-gray-600 focus:outline-none"
               type="submit"
             >
@@ -79,33 +82,56 @@
 
 <script>
 import Swal from "sweetalert2";
-// import config from "@/config";
 export default {
-  data() {
+  data(){
     return {
       // API_KEY:config.getApi.apiKey,
+      getKey:process.env.Key,
        fname: "",
       lname: "",
       email: "",
       password: "",
-      checkForm: false,
+      // checkForm: false,
       // FORM VARIABLE
       validEmail: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g,
       validName: /\d+$/g,
-    };
-  },
+    }
 
-  methods: {
-    // FORM VALIDATION METHOD
-    
+  },
+   
+    methods: {
+      validateForm(){
+      console.log("working")
+    const fname = this.validName;
+    const lname = document.getElementById("lname");
+    const email = document.getElementById("lname");
+    // const email=document.getElementById("id2");
+    if(!fname.checkValidity()) {
+      // document.getElementById("demo").innerHTML = fname.validationMessage;
+    }else if(!lname.checkValidity()){
+      // document.getElementById("demo2").innerHTML = lname.validationMessage;
+
+    }else if (!email.checkValidity()) {
+    //  document.getElementById("demo3").innerHTML = email.validationMessage;
+    } else{
+
+    };
+
+     
+
+    },
+    // FORM VALIDATION METHOD       
     registration() {
-        // this. validateForm()
+      console.log(this.getKey)
+      // this. validateForm()
+
       var axios = require("axios");
       var data = JSON.stringify({
         email: this.email,
         firstName: this.fname,
         lastName: this.lname,
         password: this.password,
+        
       });
 
       var config = {
@@ -113,6 +139,7 @@ export default {
         url: "https://worthtin.backendless.app/api/data/Users",
         headers: {
           "Content-Type": "application/json",
+          "x-api-key":this.getKey
         },
         data: data,
       };
@@ -121,43 +148,19 @@ export default {
         .then(function (response) {
           // console.log(JSON.stringify(response.data));
           Swal.fire("Registration Sucessful");
-          window.location.href = "/login";
+          // window.location.href = "/login";
         })
         .catch(function (error) {
           console.log(error);
           Swal.fire("NOT Sucessful");
         });
     },
-
-    greeting(){
-      Swal.fire("hello")
-
-    },
-
-
-    validateForm(){
-      // validate firstname
-      if (this.fname == "" || validName.test(this.fname)) {
-        window.alert("Please enter your name properly.");
-         this.fname.focus();
-        return false;
-      }
-      // validate last name
-      if (this.lname == "" || validName.test(this.lname)) {
-        window.alert("Please enter your name properly.");
-        this.lname.focus();
-        return false;
-      }
-
-      // validate email
-      if (email == "" || !validEmail.test(email)) {
-        window.alert("Please enter a valid e-mail address.");
-        this.email.focus();
-        return false;
-      }
-    },
+   
   },
-};
+  };
+
+ 
+
 </script>
 
 <style></style>

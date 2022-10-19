@@ -1,7 +1,7 @@
-const env=require('dotenv').config();
+// const env=require('dotenv').config();
 export default {
-  mode:'universal',
-  env:env.parsed,
+  // mode:'universal',
+  // env:env.parsed,
 
   // Global page headers: https://go.nuxtjs.dev/config-head
 
@@ -36,6 +36,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/dotenv',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
