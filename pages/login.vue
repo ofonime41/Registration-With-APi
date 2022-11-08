@@ -92,7 +92,8 @@
   
         var config = {
           method: 'post',
-          url: "https://worthtin.backendless.app/api/users/login",
+          url:"https://sugaryreading.backendless.app/api//users/login",
+          
           headers: {
             'Content-Type': 'application/json'
           },

@@ -24,13 +24,15 @@
           <!-- fname -->
           <div  class="w-full mt-4">
             <input id="fname"
+            pattern="[a-zA-Z]{1,}"
               v-model="fname"
               class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300"
               type="text"
               placeholder="First Name"
               aria-label="First Name"
-              required
+              required  
             />
+            <p id="demo" class="text"></p>
           </div>
           <!-- lname -->
           <div  class="w-full mt-4">
@@ -39,9 +41,9 @@
               v-model="lname"
               class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300"
               type="text"
+              pattern="[a-zA-Z]{1,}"
               placeholder="Last Name"
               aria-label="Last Name"
-              required
             />
             
           </div>
@@ -52,6 +54,7 @@
               v-model="email"
               class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300"
               type="email"
+              required
               placeholder="Email Address"
               aria-label="Email Address"
             />
@@ -67,7 +70,7 @@
           </div>
 
           <div class="flex items-center justify-between mt-4">
-            <button @click="validateForm" 
+            <button 
               class="px-4 py-2 leading-5 text-white transition-colors duration-200 transform bg-gray-700 rounded hover:bg-gray-600 focus:outline-none"
               type="submit"
             >
@@ -93,33 +96,35 @@ export default {
       password: "",
       // checkForm: false,
       // FORM VARIABLE
-      validEmail: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g,
-      validName: /\d+$/g,
+       validEmail: '/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/g',
+      redex:'[A-Za-z]'
     }
 
   },
    
     methods: {
-      validateForm(){
-      console.log("working")
-    const fname = this.validName;
-    const lname = document.getElementById("lname");
-    const email = document.getElementById("lname");
-    // const email=document.getElementById("id2");
-    if(!fname.checkValidity()) {
-      // document.getElementById("demo").innerHTML = fname.validationMessage;
-    }else if(!lname.checkValidity()){
-      // document.getElementById("demo2").innerHTML = lname.validationMessage;
+    //   validateForm(){
+    //   // console.log("working")
+    // const fname = document.getElementById("fname");
+    // const lname = document.getElementById("lname");
+    // const email = document.getElementById("email");
+    // // const email=document.getElementById("id2");
+    
+    // if(!fname.checkValidity()) {
+    //     document.getElementById("demo").innerHTML = fname.validationMessage;
+    //       //  document.getElementById("demo").innerHTML = lname.validationMessage;
+    // }else if(!lname.checkValidity()){
+    //    document.getElementById("demo2").innerHTML = lname.validationMessage;
 
-    }else if (!email.checkValidity()) {
-    //  document.getElementById("demo3").innerHTML = email.validationMessage;
-    } else{
+    // }else if (!email.checkValidity()) {
+    // //  document.getElementById("demo3").innerHTML = email.validationMessage;
+    // } else{
 
-    };
+    // };
 
      
 
-    },
+    // },
     // FORM VALIDATION METHOD       
     registration() {
       console.log(this.getKey)
@@ -136,7 +141,7 @@ export default {
 
       var config = {
         method: "post",
-        url: "https://worthtin.backendless.app/api/data/Users",
+        url: "https://sugaryreading.backendless.app/api/data/Users",
         headers: {
           "Content-Type": "application/json",
           "x-api-key":this.getKey
